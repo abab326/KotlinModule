@@ -1,0 +1,60 @@
+if (Boolean.valueOf(isModule)) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+android {
+    compileSdkVersion rootProject.ext.versionValue.compileSdkVersion
+    buildToolsVersion rootProject.ext.versionValue.buildToolsVersion
+
+    defaultConfig {
+        if (Boolean.valueOf(isModule)) {
+            applicationId "com.liushx.moduleuser"
+            multiDexEnabled true
+        }
+
+        minSdkVersion rootProject.ext.versionValue.minSdkVersion
+        targetSdkVersion rootProject.ext.versionValue.targetSdkVersion
+        versionCode rootProject.ext.versionValue.versionCode
+        versionName rootProject.ext.versionValue.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            if (Boolean.valueOf(isModule)) {
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+        }
+
+    }
+    compileOptions {
+        sourceCompatibility = 1.7
+        targetCompatibility = 1.7
+    }
+}
+
+dependencies {
+    //  implementation "com.liushx.android:corelibrary:1.0.0"
+    implementation project(path: ':corelibrary')
+    kapt "com.alibaba:arouter-compiler:${versionValue["arouter_compiler"]}"
+    kapt 'com.github.bumptech.glide:compiler:4.10.0'
+}

@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.alibaba.arouter'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+
+}
+android {
+    compileSdkVersion rootProject.ext.versionValue.compileSdkVersion
+    buildToolsVersion rootProject.ext.versionValue.buildToolsVersion
+    defaultConfig {
+        applicationId "com.liushx.kotlinmodule"
+        minSdkVersion rootProject.ext.versionValue.minSdkVersion
+        targetSdkVersion rootProject.ext.versionValue.targetSdkVersion
+        versionCode rootProject.ext.versionValue.versionCode
+        versionName rootProject.ext.versionValue.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    /**
+     * 配置版本类型
+     */
+    buildTypes {
+        release {
+            // 是否开启代码混淆
+            minifyEnabled true
+            // 是否开启资源压缩
+            zipAlignEnabled true
+            // 是否开启移除无用资源
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    /**
+     * 配置产品特性
+     *
+     */
+    productFlavors {
+
+    }
+    /**
+     * 修改 apk 输出路径及文件名称
+     */
+    applicationVariants.all {
+        //判断是release还是debug版本
+        def buildType = it.buildType.name
+        def fileName
+        //获取当前时间的"YYYY-MM-dd"格式。
+        def createTime = new Date().format("YYYY-MM-dd", TimeZone.getTimeZone("GMT+08:00"))
+        //对不是【debug】包起作用，如果是【debug】包则不变更输出路径，否则可能导致AS无法自动安装【debug】包。
+        if (buildType != "debug") {
+            it.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/apks/${buildType}/${it.flavorName}/${createTime}")
+        }
+        it.outputs.each {
+            output ->
+                //对不是【debug】类型的包则变更名称。
+                def outputFile = output.outputFile
+                if (buildType != "debug" && outputFile.name.endsWith('.apk')) {
+                    //我此处的命名规则是：渠道名_项目名_版本名_创建时间_构建类型.apk
+                    def createDateTime = new Date().format("YYYY-MM-dd-HH-mm", TimeZone.getTimeZone("GMT+08:00"))
+                    fileName = "${buildType}_${it.flavorName}_v${defaultConfig.versionName}_D_${createDateTime}.apk"
+                    //将名字打印出来，以便及时查看是否满意。
+                    println "文件名：-----------------${fileName}"
+                    //重新对apk命名。(适用于Gradle4.0以下版本)
+                    //it.outputFile = new File(it.outputFile.parent, fileName)
+                    //重新对apk命名。(适用于Gradle4.0（含）以上版本)如果你Gradle版本是4.0以下版本则将上面的一行代码放开并注释下面的这一行。
+                    output.outputFileName = fileName
+                }
+        }
+    }
+
+}
+
+dependencies {
+
+    //  implementation "com.liushx.android:corelibrary:1.0.0"
+    implementation project(path: ':corelibrary')
+    kapt "com.alibaba:arouter-compiler:${versionValue["arouter_compiler"]}"
+    kapt 'com.github.bumptech.glide:compiler:4.10.0'
+    if (!Boolean.valueOf(rootProject.ext.isModule)) {
+        implementation project(path: ':modulehome')
+        implementation project(path: ':moduleuser')
+    }
+}

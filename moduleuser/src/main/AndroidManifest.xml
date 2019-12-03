@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.liushx.moduleuser">
+
+    <application>
+        <activity
+            android:name=".UserMainActivity"
+            android:screenOrientation="portrait" />
+
+        <service android:name=".services.ImpMyAidlInterface">
+            <intent-filter>
+                <action android:name="com.liushx.moduleuser.ImpMyAidlInterface" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>

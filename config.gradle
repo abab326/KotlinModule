@@ -1,0 +1,36 @@
+/**
+ *
+ *  应用配置文件 集中配置应用相关信息
+ *
+ */
+
+ext {
+    /**
+     *
+     *  模块化开发开关
+     *  true 每个业务Module可以单独开发
+     *  false 每个业务Module以lib的方式运行
+     *  修改之后需要Sync方可生效
+     *
+     * */
+    isModule = false
+    /**
+     * 统一应用内各版本号配置
+     *
+     */
+    versionValue = [
+            //版本号
+            versionCode      : 1,
+            //版本名称
+            versionName      : "1.0.0",
+            //SdkVersion
+            compileSdkVersion: 29,
+            buildToolsVersion: "29.0.2",
+            minSdkVersion    : 19,
+            targetSdkVersion : 29,
+            arouter_compiler : "1.2.2",
+            rxbinding        : "3.0.0",
+            retrofit         : "2.6.2",
+            navigation       : "2.1.0"
+    ]
+}

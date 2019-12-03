@@ -1,0 +1,2 @@
+include ':app', ':corelibrary', ':modulehome', ':moduleuser'
+rootProject.name='KotlinModule'

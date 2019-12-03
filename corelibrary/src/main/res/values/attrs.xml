@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleDashboard">
+        <attr name="BackgroundColor" format="reference|color" />
+        <attr name="BorderWidth" format="reference|float" />
+    </declare-styleable>
+</resources>

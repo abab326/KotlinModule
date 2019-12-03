@@ -1,0 +1,116 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+android {
+
+    compileSdkVersion rootProject.ext.versionValue.compileSdkVersion
+    buildToolsVersion rootProject.ext.versionValue.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.versionValue.minSdkVersion
+        targetSdkVersion rootProject.ext.versionValue.targetSdkVersion
+        versionCode rootProject.ext.versionValue.versionCode
+        versionName rootProject.ext.versionValue.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    buildTypes {
+        release {
+            // 是否开启代码混淆
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+
+    androidTestApi "junit:junit:4.12"
+    androidTestApi "androidx.test.ext:junit:1.1.1"
+    androidTestApi "androidx.test.espresso:espresso-core:3.2.0"
+
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // androidx 库 https://developer.android.google.cn/jetpack/androidx/migrate
+    api "androidx.appcompat:appcompat:1.1.0"
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    api "androidx.core:core-ktx:1.2.0-rc01"
+    api "androidx.constraintlayout:constraintlayout:1.1.3"
+    api 'com.google.android.material:material:1.2.0-alpha02'
+    api 'androidx.recyclerview:recyclerview:1.1.0'
+    api 'androidx.viewpager:viewpager:1.0.0'
+    api 'androidx.viewpager2:viewpager2:1.0.0'
+    api 'androidx.coordinatorlayout:coordinatorlayout:1.1.0-rc01'
+    api "androidx.preference:preference:1.1.0"
+    api "androidx.navigation:navigation-fragment-ktx:${versionValue["navigation"]}"
+    api "androidx.navigation:navigation-ui-ktx:${versionValue["navigation"]}"
+    api 'androidx.lifecycle:lifecycle-extensions:2.2.0-rc02'
+    api 'androidx.palette:palette:1.0.0'
+    // multidex
+    api "com.android.support:multidex:1.0.3"
+    //轮播图 https://github.com/youth5201314/banner
+    api "com.youth.banner:banner:1.4.10"
+    //glide
+    api 'com.github.bumptech.glide:glide:4.10.0'
+    kapt 'com.github.bumptech.glide:compiler:4.10.0'
+    // Arouter
+    api "com.alibaba:arouter-api:1.5.0"
+    api "com.alibaba:arouter-annotation:1.0.6"
+    kapt "com.alibaba:arouter-compiler:${versionValue["arouter_compiler"]}"
+    // logger
+    api 'com.orhanobut:logger:2.2.0'
+    // retrofit
+    api "com.squareup.retrofit2:retrofit:${versionValue["retrofit"]}"
+    api "com.squareup.retrofit2:adapter-rxjava2:${versionValue["retrofit"]}"
+    api "com.squareup.retrofit2:converter-gson:${versionValue["retrofit"]}"
+    api "com.squareup.okhttp3:logging-interceptor:3.10.0"
+    // rxjava
+    api "io.reactivex.rxjava2:rxjava:2.2.13"
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api 'com.github.tbruyelle:rxpermissions:0.10.2'
+    // circleimageview https://github.com/hdodenhof/CircleImageView
+    api "de.hdodenhof:circleimageview:3.0.1"
+    // SmartRefresh  https://github.com/scwang90/SmartRefreshLayout/tree/master#%E7%AE%80%E5%8D%95%E7%94%A8%E4%BE%8B
+    api "com.scwang.smart:refresh-layout-kernel:2.0.0-alpha-1"
+    api "com.scwang.smart:refresh-header-classics:2.0.0-alpha-1"
+    api "com.scwang.smart:refresh-footer-classics:2.0.0-alpha-1"
+    // PhotoView https://github.com/chrisbanes/PhotoView
+    api "com.github.chrisbanes:PhotoView:2.3.0"
+    // calendarview https://github.com/huanghaibin-dev/CalendarView
+    api "com.haibin:calendarview:3.6.7"
+    // 列表的导航悬停分组索引列表 https://github.com/mcxtzhang/SuspensionIndexBar
+    api "com.github.mcxtzhang:SuspensionIndexBar:V1.0.0"
+    // Powerful and flexible RecyclerAdapter  https://github.com/CymChad/BaseRecyclerViewAdapterHelper
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47'
+    // is a well-designed local image and video selector for Android.  https://github.com/zhihu/Matisse
+    api 'com.zhihu.android:matisse:0.5.3-beta3'
+    // 汉字转拼音 https://github.com/promeG/TinyPinyin
+    // api 'com.github.promeg:tinypinyin:2.0.3' // TinyPinyin核心包，约80KB
+    api 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'// 可选，适用于Android的中国地区词典
+
+}
+/************** 发布到maven 仓配置 *********************/
+apply plugin: 'maven'
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.groupId = 'com.liushx.android'
+            pom.artifactId = "corelibrary"
+            pom.version = "1.0.0"
+            pom.packaging = 'aar'
+            repository(url: uri("F:/localmaven/repository"))
+        }
+    }
+}
