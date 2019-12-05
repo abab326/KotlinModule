@@ -1,7 +1,7 @@
 package com.liushx.corelibrary.retrofit
 
 import com.liushx.corelibrary.config.RetrofitConfig
-import com.liushx.corelibrary.utils.PreferencesUtil
+import com.liushx.corelibrary.utils.PreferencesUtils
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -21,13 +21,13 @@ class HeaderConfigInterceptor : Interceptor {
             //匹配获得新的BaseUrl
             val newBaseUrl = when (headerValues[0]) {
                 "pwp" -> HttpUrl.parse(
-                    PreferencesUtil.get(RetrofitConfig.baseUrl, "pwp")
+                    PreferencesUtils.get(RetrofitConfig.baseUrl, "pwp")
                 )
                 "bi" -> HttpUrl.parse(
-                    PreferencesUtil.get(RetrofitConfig.baseUrl, "pwp")
+                    PreferencesUtils.get(RetrofitConfig.baseUrl, "pwp")
                 )
                 else -> HttpUrl.parse(
-                    PreferencesUtil.get(RetrofitConfig.baseUrl, "pwp")
+                    PreferencesUtils.get(RetrofitConfig.baseUrl, "pwp")
                 )
             }
             //从request中获取原有的HttpUrl实例oldHttpUrl

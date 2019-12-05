@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.telephony.TelephonyManager
 
 
-class NetStateUtils {
+class NetStateUtil {
 
     companion object {
         /**

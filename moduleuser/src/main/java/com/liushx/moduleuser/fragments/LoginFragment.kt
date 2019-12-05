@@ -3,13 +3,11 @@ package com.liushx.moduleuser.fragments
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
-import com.bumptech.glide.TransitionOptions
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.liushx.corelibrary.base.BaseFragment
@@ -17,7 +15,7 @@ import com.liushx.corelibrary.config.BaseARouterConfig
 import com.liushx.corelibrary.mvp.MvpPresenter
 import com.liushx.corelibrary.mvp.MvpView
 import com.liushx.corelibrary.services.IHomeModuleService
-import com.liushx.corelibrary.utils.StatusBarUtil
+import com.liushx.corelibrary.utils.StatusBarUtils
 import com.liushx.moduleuser.R
 import com.liushx.moduleuser.viewmodels.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -34,7 +32,7 @@ class LoginFragment : BaseFragment<MvpView, MvpPresenter<MvpView, LoginViewModel
     override fun onStart() {
         super.onStart()
         activity!!.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
-        StatusBarUtil.setStatusBarColor(activity!!.window, android.R.color.white, false)
+        StatusBarUtils.setStatusBarColor(activity!!.window, android.R.color.white, false)
     }
 
     override fun setContextView(): Int {

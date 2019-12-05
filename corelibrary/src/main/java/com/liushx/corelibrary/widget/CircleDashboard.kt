@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.liushx.corelibrary.R
-import com.liushx.corelibrary.utils.DisplayUtil
+import com.liushx.corelibrary.utils.DisplayUtils
 
 /**
  * 半圆形仪表盘
@@ -16,16 +16,16 @@ class CircleDashboard : View {
     private val defaultBgColor = ContextCompat.getColor(context, R.color.base_light_gray)
     private val defaultProgressColor = ContextCompat.getColor(context, R.color.colorPrimary)
     private val defaultPadding =
-        DisplayUtil.dpToPx(8f)
+        DisplayUtils.dpToPx(8f)
     private val defaultRadius =
-        DisplayUtil.dpToPx(80f)
+        DisplayUtils.dpToPx(80f)
     private val defaultBorderWidth =
-        DisplayUtil.dpToPx(10f)
+        DisplayUtils.dpToPx(10f)
     private val defaultDialsLength =
-        DisplayUtil.dpToPx(10f)
+        DisplayUtils.dpToPx(10f)
 
     private val defaultViewSize =
-        DisplayUtil.dpToPx(10f)
+        DisplayUtils.dpToPx(10f)
 
     private var bgPaint = Paint()
     private var dialsPaint = Paint()
@@ -65,10 +65,10 @@ class CircleDashboard : View {
             ContextCompat.getColor(context, R.color.base_light_gray)
         )
         borderWidth = ta.getFloat(R.styleable.CircleDashboard_BorderWidth,
-            DisplayUtil.dpToPx(3f)
+            DisplayUtils.dpToPx(3f)
         )
 
-        textPaint.textSize = DisplayUtil.sp2px(
+        textPaint.textSize = DisplayUtils.sp2px(
             12f
         ).toFloat()
         textPaint.flags = Paint.ANTI_ALIAS_FLAG
@@ -110,7 +110,7 @@ class CircleDashboard : View {
     private fun drawdials(canvas: Canvas) {
         canvas.save()
         canvas.rotate(-180f)
-        dialsPaint.strokeWidth = DisplayUtil.dpToPx(
+        dialsPaint.strokeWidth = DisplayUtils.dpToPx(
             2f
         ).toFloat()
         dialsPaint.isAntiAlias = true
@@ -145,7 +145,7 @@ class CircleDashboard : View {
 
                 canvas.drawText(
                     dialsValue,
-                    radius - bigDialsLength - rect.width() - DisplayUtil.dpToPx(
+                    radius - bigDialsLength - rect.width() - DisplayUtils.dpToPx(
                         2f
                     ),
                     when (index) {

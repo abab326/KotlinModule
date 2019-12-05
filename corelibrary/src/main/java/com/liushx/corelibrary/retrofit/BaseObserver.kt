@@ -1,17 +1,11 @@
 package com.liushx.corelibrary.retrofit
 
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.text.TextUtils
-import android.widget.ProgressBar
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.AlertDialogLayout
-import androidx.core.app.DialogCompat
 import com.google.gson.JsonParseException
 import com.liushx.corelibrary.R
-import com.liushx.corelibrary.base.BaseApplication
 import com.liushx.corelibrary.manager.ActivityStackManager
-import com.liushx.corelibrary.utils.ToastUtil
+import com.liushx.corelibrary.utils.ToastUtils
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import org.json.JSONException
@@ -72,11 +66,11 @@ abstract class BaseObserver<T>(
 
     fun onException(reason: ExceptionReason) {
         when (reason) {
-            ExceptionReason.CONNECT_ERROR -> ToastUtil.show(CONNECT_ERROR)
-            ExceptionReason.CONNECT_TIMEOUT -> ToastUtil.show(CONNECT_TIMEOUT)
-            ExceptionReason.BAD_NETWORK -> ToastUtil.show(BAD_NETWORK)
-            ExceptionReason.PARSE_ERROR -> ToastUtil.show(PARSE_ERROR)
-            ExceptionReason.UNKNOWN_ERROR -> ToastUtil.show(UNKNOWN_ERROR)
+            ExceptionReason.CONNECT_ERROR -> ToastUtils.show(CONNECT_ERROR)
+            ExceptionReason.CONNECT_TIMEOUT -> ToastUtils.show(CONNECT_TIMEOUT)
+            ExceptionReason.BAD_NETWORK -> ToastUtils.show(BAD_NETWORK)
+            ExceptionReason.PARSE_ERROR -> ToastUtils.show(PARSE_ERROR)
+            ExceptionReason.UNKNOWN_ERROR -> ToastUtils.show(UNKNOWN_ERROR)
         }
     }
 
@@ -95,9 +89,9 @@ abstract class BaseObserver<T>(
     open fun onFailing(message: String) {
 
         if (TextUtils.isEmpty(message)) {
-            ToastUtil.show(RESPONSE_RETURN_ERROR)
+            ToastUtils.show(RESPONSE_RETURN_ERROR)
         } else {
-            ToastUtil.show(message)
+            ToastUtils.show(message)
         }
     }
 

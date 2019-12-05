@@ -5,7 +5,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.liushx.modulehome.R
 import com.liushx.modulehome.models.CityBean
 
-class CityAdpater : BaseQuickAdapter<CityBean, BaseViewHolder>(R.layout.item_home_demo) {
+class CityAdapter : BaseQuickAdapter<CityBean, BaseViewHolder>(R.layout.item_home_demo) {
 
 
     override fun convert(helper: BaseViewHolder, item: CityBean?) {

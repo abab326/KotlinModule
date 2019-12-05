@@ -10,7 +10,7 @@ import android.net.ConnectivityManager.NetworkCallback
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.liushx.corelibrary.enums.NetWorkState
-import com.liushx.corelibrary.utils.NetStateUtils
+import com.liushx.corelibrary.utils.NetStateUtil
 
 /**
  * 网络状态监听客理类
@@ -36,7 +36,7 @@ class NetWorkMonitorManager {
                     ignoreCase = true
                 )
             ) {
-                val netWorkState = when (NetStateUtils.getAPNType(context)) {
+                val netWorkState = when (NetStateUtil.getAPNType(context)) {
                     0 -> NetWorkState.NONE
                     1 -> NetWorkState.WIFI
                     else -> NetWorkState.GPRS
@@ -55,7 +55,7 @@ class NetWorkMonitorManager {
         override fun onAvailable(network: Network) {
             super.onAvailable(network)
 
-            val netWorkState = when (NetStateUtils.getAPNType(context)) {
+            val netWorkState = when (NetStateUtil.getAPNType(context)) {
                 0 -> NetWorkState.NONE
                 1 -> NetWorkState.WIFI
                 else -> NetWorkState.GPRS

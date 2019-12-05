@@ -8,7 +8,7 @@ import android.widget.Toast
  * Toast 工具类
  */
 @SuppressLint("StaticFieldLeak")
-class ToastUtil {
+class ToastUtils {
     companion object {
         private var mToast: Toast? = null
 

@@ -60,6 +60,7 @@ android {
         if (buildType != "debug") {
             it.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/apks/${buildType}/${it.flavorName}/${createTime}")
         }
+
         it.outputs.each {
             output ->
                 //对不是【debug】类型的包则变更名称。

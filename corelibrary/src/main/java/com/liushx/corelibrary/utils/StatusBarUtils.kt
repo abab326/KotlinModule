@@ -5,7 +5,7 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 
-class StatusBarUtil {
+class StatusBarUtils {
     companion object {
 
         /**

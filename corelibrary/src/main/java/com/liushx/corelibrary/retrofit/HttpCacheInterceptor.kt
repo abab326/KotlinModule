@@ -2,8 +2,7 @@ package com.liushx.corelibrary.retrofit
 
 
 import com.liushx.corelibrary.base.BaseApplication
-import com.liushx.corelibrary.manager.NetWorkMonitorManager
-import com.liushx.corelibrary.utils.NetStateUtils
+import com.liushx.corelibrary.utils.NetStateUtil
 import okhttp3.*
 import retrofit2.HttpException
 
@@ -14,14 +13,14 @@ class HttpCacheInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
         //没网强制从缓存读取
-        if (NetStateUtils.getAPNType(BaseApplication.getContext()) == 0) {
+        if (NetStateUtil.getAPNType(BaseApplication.getContext()) == 0) {
             request = request.newBuilder().cacheControl(CacheControl.FORCE_CACHE).build()
         }
 
         val originalResponse = chain.proceed(request)
 
 
-        if (NetStateUtils.getAPNType(BaseApplication.getContext()) != 0) {
+        if (NetStateUtil.getAPNType(BaseApplication.getContext()) != 0) {
             //有网的时候读接口上的@Headers里的配置
             val cacheControl = request.cacheControl().toString()
             return originalResponse.newBuilder()

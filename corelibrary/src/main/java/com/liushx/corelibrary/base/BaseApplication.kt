@@ -6,7 +6,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.liushx.corelibrary.BuildConfig
 import com.liushx.corelibrary.callbacks.CrashHandler
 import com.liushx.corelibrary.callbacks.ImplActivityLifecycleCallbacks
-import com.liushx.corelibrary.utils.ToastUtil
+import com.liushx.corelibrary.utils.ToastUtils
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 
@@ -36,7 +36,7 @@ abstract class BaseApplication : Application() {
                 return BuildConfig.DEBUG
             }
         })
-        ToastUtil.init(this)
+        ToastUtils.init(this)
         ARouter.init(this)
         // 注册 Activity 生命周期监听
         this.activityLifecycleCallbacks = ImplActivityLifecycleCallbacks()

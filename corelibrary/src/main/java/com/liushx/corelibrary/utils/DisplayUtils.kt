@@ -10,7 +10,7 @@ import android.util.TypedValue
 /**
  * 单位转换类 dp px sp
  */
-class DisplayUtil {
+class DisplayUtils {
 
     companion object {
         /**

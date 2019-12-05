@@ -1,19 +1,19 @@
 package com.liushx.corelibrary.utils
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ComponentName
 import android.content.Intent
 import android.content.Intent.ShortcutIconResource
 import android.net.Uri
 import com.liushx.corelibrary.R
+import javax.crypto.EncryptedPrivateKeyInfo
 
 
 /**
  * 桌面快捷图标工具类
  *  api >= 25 后使用 ShortcutManager
  */
-class ShortCutUtil {
+class ShortCutUtils {
 
     companion object {
 
@@ -88,6 +88,8 @@ class ShortCutUtil {
                 Intent.EXTRA_SHORTCUT_INTENT, Intent(Intent.ACTION_MAIN).setComponent(cn)
             )
             activity.sendBroadcast(shortcut)
+
+
         }
     }
 }

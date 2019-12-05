@@ -8,7 +8,7 @@ import java.io.*
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-class PreferencesUtil {
+class PreferencesUtils {
 
     companion object {
 

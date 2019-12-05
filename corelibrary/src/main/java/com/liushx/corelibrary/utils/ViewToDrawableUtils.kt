@@ -9,7 +9,7 @@ import android.view.View
  *  view 转bitmap
  *
  */
-class ViewToDrawableUtil {
+class ViewToDrawableUtils {
 
     companion object {
         /**

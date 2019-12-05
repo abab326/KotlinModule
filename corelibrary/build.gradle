@@ -52,12 +52,13 @@ dependencies {
     api 'androidx.recyclerview:recyclerview:1.1.0'
     api 'androidx.viewpager:viewpager:1.0.0'
     api 'androidx.viewpager2:viewpager2:1.0.0'
-    api 'androidx.coordinatorlayout:coordinatorlayout:1.1.0-rc01'
+    api 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
     api "androidx.preference:preference:1.1.0"
     api "androidx.navigation:navigation-fragment-ktx:${versionValue["navigation"]}"
     api "androidx.navigation:navigation-ui-ktx:${versionValue["navigation"]}"
-    api 'androidx.lifecycle:lifecycle-extensions:2.2.0-rc02'
+    api 'androidx.lifecycle:lifecycle-extensions:2.2.0-rc03'
     api 'androidx.palette:palette:1.0.0'
+    api 'androidx.gridlayout:gridlayout:1.0.0'
     // multidex
     api "com.android.support:multidex:1.0.3"
     //轮播图 https://github.com/youth5201314/banner

@@ -4,7 +4,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DateFormatUtil {
+class DateFormatUtils {
     /**
      * 日期格式化类型
      *

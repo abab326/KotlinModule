@@ -8,7 +8,7 @@ import android.os.Build
 import android.os.Environment
 import android.os.Looper
 import com.liushx.corelibrary.manager.ActivityStackManager
-import com.liushx.corelibrary.utils.ToastUtil
+import com.liushx.corelibrary.utils.ToastUtils
 import com.orhanobut.logger.Logger
 import java.io.File
 import java.io.FileOutputStream
@@ -16,7 +16,6 @@ import java.io.PrintWriter
 import java.io.StringWriter
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.HashMap
 import kotlin.system.exitProcess
 
 /**
@@ -84,7 +83,7 @@ class CrashHandler private constructor() : Thread.UncaughtExceptionHandler {
         //使用Toast来显示异常信息
         Thread {
             Looper.prepare()
-            ToastUtil.showLong("很抱歉,程序出现异常,即将退出.")
+            ToastUtils.showLong("很抱歉,程序出现异常,即将退出.")
             Looper.loop()
         }.start()
 

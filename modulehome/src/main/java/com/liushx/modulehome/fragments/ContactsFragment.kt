@@ -7,7 +7,7 @@ import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.liushx.corelibrary.base.BaseFragment
 import com.liushx.corelibrary.mvp.MvpView
 import com.liushx.modulehome.R
-import com.liushx.modulehome.adapters.CityAdpater
+import com.liushx.modulehome.adapters.CityAdapter
 import com.liushx.modulehome.contracts.ContactContract
 import com.liushx.modulehome.models.CityBean
 import com.liushx.modulehome.persenters.ContactsPresenter
@@ -26,7 +26,7 @@ class ContactsFragment : BaseFragment<MvpView, ContactsPresenter>(), ContactCont
     }
 
     private val datas = ArrayList<CityBean>()
-    private val adapter = CityAdpater()
+    private val adapter = CityAdapter()
     private val suspensionDecoration: SuspensionDecoration by lazy {
         SuspensionDecoration(
             context,
@@ -49,7 +49,7 @@ class ContactsFragment : BaseFragment<MvpView, ContactsPresenter>(), ContactCont
         contacts_recyclerView.adapter = adapter
         //indexbar初始化
         contacts_indexBar.setmPressedShowTextView(contacts_tv_hint)//设置HintTextView
-            .setNeedRealIndex(false)//设置需要真实的索引
+            .setNeedRealIndex(true)//设置需要真实的索引
             .setmLayoutManager(linearLayoutManager)//设置RecyclerView的LayoutManager
         contacts_recyclerView.addOnItemTouchListener(object : OnItemChildClickListener() {
             override fun onSimpleItemChildClick(
@@ -70,7 +70,6 @@ class ContactsFragment : BaseFragment<MvpView, ContactsPresenter>(), ContactCont
 
         contacts_indexBar.setmSourceDatas(datas).invalidate()
         adapter.setNewData(datas)
-
         suspensionDecoration.setmDatas(datas)
     }
 

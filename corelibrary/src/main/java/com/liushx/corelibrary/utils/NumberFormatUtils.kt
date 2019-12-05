@@ -7,7 +7,7 @@ import java.text.NumberFormat
 import java.util.*
 
 
-class NumberFormatUtil {
+class NumberFormatUtils {
 
     companion object {
 

@@ -5,26 +5,28 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
+import android.graphics.BitmapFactory
 import android.os.IBinder
-import android.provider.MediaStore
-import android.util.Base64
 import com.liushx.corelibrary.IMyAidlInterface
 import com.liushx.corelibrary.base.BaseFragment
 import com.liushx.corelibrary.mvp.MvpPresenter
 import com.liushx.corelibrary.mvp.MvpView
-import kotlinx.android.synthetic.main.fragment_select_image.*
-
+import com.liushx.corelibrary.retrofit.BaseObserver
+import com.liushx.corelibrary.retrofit.RetrofitManager
 import com.liushx.modulehome.R
+import com.liushx.modulehome.api.HomeApiService
+import com.tbruyelle.rxpermissions2.RxPermissions
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
-
-import com.tbruyelle.rxpermissions2.RxPermissions
 import com.zhihu.matisse.engine.impl.GlideEngine
-import com.zhihu.matisse.engine.impl.PicassoEngine
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_select_image.*
+import okhttp3.ResponseBody
 
 
-class SelectImageFragment : BaseFragment<MvpView, MvpPresenter<MvpView,*>>() {
-    override fun createPresenter(): MvpPresenter<MvpView,*>? {
+class SelectImageFragment : BaseFragment<MvpView, MvpPresenter<MvpView, *>>() {
+    override fun createPresenter(): MvpPresenter<MvpView, *>? {
         return null
     }
 
@@ -68,6 +70,23 @@ class SelectImageFragment : BaseFragment<MvpView, MvpPresenter<MvpView,*>>() {
         btn_get_aidl.setOnClickListener {
             tv_show_aidl.text = iMyAidlInterface?.name ?: "没有建立联接"
         }
+        btn_upLoad.setOnClickListener {
+            upLoad()
+        }
+    }
+
+    private fun upLoad() {
+        RetrofitManager.getInstance().create(HomeApiService::class.java).getImage()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : BaseObserver<ResponseBody>(true) {
+                override fun onSuccess(response: ResponseBody) {
+
+                    val bitmap = BitmapFactory.decodeStream(response.byteStream())
+                    iv_upload.setImageBitmap(bitmap)
+                }
+
+            })
     }
 
     /**
